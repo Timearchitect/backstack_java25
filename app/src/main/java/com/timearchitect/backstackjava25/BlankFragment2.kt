@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +35,13 @@ class BlankFragment2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank2, container, false)
+      var v=  inflater.inflate(R.layout.fragment_blank2, container, false)
+
+        var b = arguments
+        Toast.makeText(context,b!!.getString("name"),Toast.LENGTH_LONG).show()
+
+
+        return v
     }
 
     companion object {

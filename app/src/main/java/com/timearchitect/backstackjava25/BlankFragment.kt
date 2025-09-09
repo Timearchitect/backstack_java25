@@ -1,10 +1,14 @@
 package com.timearchitect.backstackjava25
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
+import com.timearchitect.backstackjava25.MainActivity.Companion.etStatic
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,12 +33,31 @@ class BlankFragment : Fragment() {
         }
     }
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false)
+        (activity as MainActivity).findViewById<TextView>(R.id.textView).setText("HEJSAN!!!")
+
+        Log.i("ALRIK", "onCreateView: "  )
+        var view:View = inflater.inflate(R.layout.fragment_blank, container, false)
+
+        var et: EditText
+        //et = (activity as MainActivity).findViewById(R.id.editTextText)
+
+
+
+       // et = (activity as MainActivity).etOnActivity
+
+         et = etStatic
+        et.setText("YOYO!!!!!")
+
+
+        return view
+
     }
 
     companion object {
@@ -55,5 +78,13 @@ class BlankFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        FramentDone(view)
+        super.onViewCreated(view, savedInstanceState)
+    }
+    fun FramentDone(view:View){
+        view.findViewById<TextView>(R.id.fragText).setText("TJENARE")
     }
 }
