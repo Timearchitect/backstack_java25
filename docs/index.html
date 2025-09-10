@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Permissions Slides</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .slides-container {
+            display: flex;
+            gap: 30px;
+            max-width: 1800px;
+            width: 100%;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            flex: 1;
+            max-height: 90vh;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .slide:hover {
+            transform: translateY(-5px);
+        }
+
+        .slide h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 2.2em;
+            font-weight: 700;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide.normal h1 {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide h2 {
+            color: #34495e;
+            margin-bottom: 25px;
+            font-size: 1.3em;
+            text-align: center;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        .permissions-grid {
+            display: grid;
+            gap: 12px;
+            font-size: 0.85em;
+        }
+
+        .permission-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px 15px;
+            border-left: 4px solid #e74c3c;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .normal .permission-item {
+            border-left-color: #27ae60;
+        }
+
+        .permission-item:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .permission-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.95em;
+            margin-bottom: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .permission-desc {
+            color: #7f8c8d;
+            line-height: 1.4;
+        }
+
+        .slide-header {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 20px;
+            margin: -30px -30px 30px -30px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .normal .slide-header {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .slide-header h1 {
+            color: white;
+            -webkit-text-fill-color: white;
+            margin-bottom: 8px;
+        }
+
+        .slide-header h2 {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1em;
+            font-weight: 400;
+        }
+
+        .permission-count {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1400px) {
+            .slides-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .slide {
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px;
+            }
+            
+            .slide-header {
+                margin: -20px -20px 20px -20px;
+                padding: 15px;
+            }
+            
+            .slide h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slides-container">
+        <!-- Slide 1: Dangerous Permissions -->
+        <div class="slide dangerous">
+            <div class="slide-header">
+                <h1>Dangerous Permissions</h1>
+                <h2>Require explicit user consent and access sensitive data or device features</h2>
+                <div class="permission-count">39 Permissions</div>
+            </div>
+
+            <div class="permissions-grid">
+                <div class="permission-item">
+                    <div class="permission-name">ACCEPT_HANDOVER</div>
+                    <div class="permission-desc">Allows a calling app to continue a call which was started in another app</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ACCESS_BACKGROUND_LOCATION</div>
+                    <div class="permission-desc">Allows an app to access location in the background</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ACCESS_COARSE_LOCATION</div>
+                    <div class="permission-desc">Allows an app to access approximate location</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ACCESS_FINE_LOCATION</div>
+                    <div class="permission-desc">Allows an app to access precise location</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ACCESS_MEDIA_LOCATION</div>
+                    <div class="permission-desc">Allows an application to access any geographic locations persisted in the user's shared collection</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ACTIVITY_RECOGNITION</div>
+                    <div class="permission-desc">Allows an application to recognize physical activity</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ADD_VOICEMAIL</div>
+                    <div class="permission-desc">Allows an application to add voicemails into the system</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ANSWER_PHONE_CALLS</div>
+                    <div class="permission-desc">Allows the app to answer an incoming phone call</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">BLUETOOTH_ADVERTISE</div>
+                    <div class="permission-desc">Required to be able to advertise to nearby Bluetooth devices</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">BLUETOOTH_CONNECT</div>
+                    <div class="permission-desc">Required to be able to connect to paired Bluetooth devices</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">BLUETOOTH_SCAN</div>
+                    <div class="permission-desc">Required to be able to discover and pair nearby Bluetooth devices</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">BODY_SENSORS</div>
+                    <div class="permission-desc">Allows an application to access data from sensors that measure what is happening inside their body, such as heart rate</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">BODY_SENSORS_BACKGROUND</div>
+                    <div class="permission-desc">Allows an application to access data from sensors in the background</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">CALL_PHONE</div>
+                    <div class="permission-desc">Allows an application to initiate a phone call without going through the Dialer user interface</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">CAMERA</div>
+                    <div class="permission-desc">Required to be able to access the camera device</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">GET_ACCOUNTS</div>
+                    <div class="permission-desc">Allows access to the list of accounts in the Accounts Service</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">POST_NOTIFICATIONS</div>
+                    <div class="permission-desc">Allows an app to post notifications</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_CALENDAR</div>
+                    <div class="permission-desc">Allows an application to read the user's calendar data</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_CALL_LOG</div>
+                    <div class="permission-desc">Allows an application to read the user's call log</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_CONTACTS</div>
+                    <div class="permission-desc">Allows an application to read the user's contacts data</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_EXTERNAL_STORAGE</div>
+                    <div class="permission-desc">Allows an application to read from external storage</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_MEDIA_AUDIO</div>
+                    <div class="permission-desc">Allows an application to read audio files from external storage</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_MEDIA_IMAGES</div>
+                    <div class="permission-desc">Allows an application to read image files from external storage</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_MEDIA_VIDEO</div>
+                    <div class="permission-desc">Allows an application to read video files from external storage</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_MEDIA_VISUAL_USER_SELECTED</div>
+                    <div class="permission-desc">Allows an application to read image or video files from external storage that a user has selected via the permission prompt photo picker</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_PHONE_NUMBERS</div>
+                    <div class="permission-desc">Allows read access to the device's phone number(s)</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_PHONE_STATE</div>
+                    <div class="permission-desc">Allows read only access to phone state, including the current cellular network information, the status of any ongoing calls, and a list of any PhoneAccounts registered on the device</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_PRECISE_PHONE_STATE</div>
+                    <div class="permission-desc">Allows read only access to precise phone state</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_SMS</div>
+                    <div class="permission-desc">Allows an application to read SMS messages</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">RECORD_AUDIO</div>
+                    <div class="permission-desc">Allows an application to record audio</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">RECEIVE_MMS</div>
+                    <div class="permission-desc">Allows an application to monitor incoming MMS messages</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">RECEIVE_SMS</div>
+                    <div class="permission-desc">Allows an application to receive SMS messages</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">RECEIVE_WAP_PUSH</div>
+                    <div class="permission-desc">Allows an application to receive WAP push messages</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">SEND_SMS</div>
+                    <div class="permission-desc">Allows an application to send SMS messages</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">USE_SIP</div>
+                    <div class="permission-desc">Allows an application to use SIP service</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">WRITE_CALENDAR</div>
+                    <div class="permission-desc">Allows an application to write the user's calendar data</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">WRITE_CALL_LOG</div>
+                    <div class="permission-desc">Allows an application to write and read the user's call log data</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">WRITE_CONTACTS</div>
+                    <div class="permission-desc">Allows an application to write the user's contacts data</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">WRITE_EXTERNAL_STORAGE</div>
+                    <div class="permission-desc">Allows an application to write to external storage</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Normal Permissions -->
+        <div class="slide normal">
+            <div class="slide-header">
+                <h1>✅ Normal Permissions</h1>
+                <h2>Granted automatically at install time and pose minimal risk</h2>
+                <div class="permission-count">68 Permissions</div>
+            </div>
+
+            <div class="permissions-grid">
+                <div class="permission-item">
+                    <div class="permission-name">ACCESS_HIDDEN_PROFILES</div>
+                    <div class="permission-desc">Allows applications to access profiles with hidden user property</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ACCESS_LOCATION_EXTRA_COMMANDS</div>
+                    <div class="permission-desc">Allows an application to access extra location provider commands</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ACCESS_NETWORK_STATE</div>
+                    <div class="permission-desc">Allows applications to access information about networks</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ACCESS_NOTIFICATION_POLICY</div>
+                    <div class="permission-desc">Marker permission for applications that wish to access notification policy</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ACCESS_WIFI_STATE</div>
+                    <div class="permission-desc">Allows applications to access information about Wi-Fi networks</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">BLUETOOTH</div>
+                    <div class="permission-desc">Allows applications to connect to paired bluetooth devices</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">BLUETOOTH_ADMIN</div>
+                    <div class="permission-desc">Allows applications to discover and pair bluetooth devices</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">BROADCAST_STICKY</div>
+                    <div class="permission-desc">Allows an application to broadcast sticky intents</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">CALL_COMPANION_APP</div>
+                    <div class="permission-desc">Allows an app which implements the InCallService API to be eligible to be enabled as a calling companion app</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">CHANGE_NETWORK_STATE</div>
+                    <div class="permission-desc">Allows applications to change network connectivity state</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">CHANGE_WIFI_MULTICAST_STATE</div>
+                    <div class="permission-desc">Allows applications to enter Wi-Fi Multicast mode</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">CHANGE_WIFI_STATE</div>
+                    <div class="permission-desc">Allows applications to change Wi-Fi connectivity state</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">CREDENTIAL_MANAGER_QUERY_CANDIDATE_CREDENTIALS</div>
+                    <div class="permission-desc">Allows a browser to invoke the set of query apis to get metadata about credential candidates</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">CREDENTIAL_MANAGER_SET_ALLOWED_PROVIDERS</div>
+                    <div class="permission-desc">Allows specifying candidate credential providers to be queried in Credential Manager</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">CREDENTIAL_MANAGER_SET_ORIGIN</div>
+                    <div class="permission-desc">Allows a browser to invoke credential manager APIs on behalf of another RP</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">DETECT_SCREEN_CAPTURE</div>
+                    <div class="permission-desc">Allows an application to get notified when a screen capture of its windows is attempted</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">DETECT_SCREEN_RECORDING</div>
+                    <div class="permission-desc">Allows an application to get notified when it is being recorded</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">DISABLE_KEYGUARD</div>
+                    <div class="permission-desc">Allows applications to disable the keyguard if it is not secure</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">ENFORCE_UPDATE_OWNERSHIP</div>
+                    <div class="permission-desc">Allows an application to indicate via PackageInstaller.SessionParams that it has the intention of becoming the update owner</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">EXPAND_STATUS_BAR</div>
+                    <div class="permission-desc">Allows an application to expand or collapse the status bar</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_CAMERA</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "camera"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_CONNECTED_DEVICE</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "connectedDevice"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_DATA_SYNC</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "dataSync"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_HEALTH</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "health"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_LOCATION</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "location"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_MEDIA_PLAYBACK</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "mediaPlayback"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_MEDIA_PROCESSING</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "mediaProcessing"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_MEDIA_PROJECTION</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "mediaProjection"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_MICROPHONE</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "microphone"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_PHONE_CALL</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "phoneCall"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_REMOTE_MESSAGING</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "remoteMessaging"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_SPECIAL_USE</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "specialUse"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">FOREGROUND_SERVICE_SYSTEM_EXEMPTED</div>
+                    <div class="permission-desc">Allows a regular application to use Service.startForeground with the type "systemExempted"</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">GET_PACKAGE_SIZE</div>
+                    <div class="permission-desc">Allows an application to find out the space used by any package</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">HIGH_SAMPLING_RATE_SENSORS</div>
+                    <div class="permission-desc">Allows an app to access sensor data with a sampling rate greater than 200 Hz</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">INSTALL_SHORTCUT</div>
+                    <div class="permission-desc">Allows an application to install a shortcut in Launcher</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">INTERACT_ACROSS_PROFILES</div>
+                    <div class="permission-desc">Allows interaction across profiles in the same profile group</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">INTERNET</div>
+                    <div class="permission-desc">Allows applications to open network sockets</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">KILL_BACKGROUND_PROCESSES</div>
+                    <div class="permission-desc">Allows an application to call ActivityManager.killBackgroundProcesses()</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">NFC</div>
+                    <div class="permission-desc">Allows applications to perform I/O operations over NFC</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">NFC_PREFERRED_PAYMENT_INFO</div>
+                    <div class="permission-desc">Allows applications to receive NFC preferred payment service information</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">NFC_TRANSACTION_EVENT</div>
+                    <div class="permission-desc">Allows applications to receive NFC transaction events</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_BASIC_PHONE_STATE</div>
+                    <div class="permission-desc">Allows read only access to phone state with a non dangerous permission</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_NEARBY_STREAMING_POLICY</div>
+                    <div class="permission-desc">Allows an application to read nearby streaming policy</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_SYNC_SETTINGS</div>
+                    <div class="permission-desc">Allows applications to read the sync settings</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">READ_SYNC_STATS</div>
+                    <div class="permission-desc">Allows applications to read the sync stats</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REBOOT</div>
+                    <div class="permission-desc">Required to be able to reboot the device</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REQUEST_COMPANION_PROFILE_APP_STREAMING</div>
+                    <div class="permission-desc">Allows application to request to stream content from an Android host to a nearby device</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REQUEST_COMPANION_PROFILE_AUTOMOTIVE_PROJECTION</div>
+                    <div class="permission-desc">Allows application to request to be associated with a vehicle head unit</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REQUEST_COMPANION_PROFILE_COMPUTER</div>
+                    <div class="permission-desc">Allows application to request to be associated with a computer</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REQUEST_COMPANION_PROFILE_GLASSES</div>
+                    <div class="permission-desc">Allows app to request to be associated with a device via glasses profile</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REQUEST_COMPANION_PROFILE_NEARBY_DEVICE_STREAMING</div>
+                    <div class="permission-desc">Allows application to request to stream content from an Android host to a nearby device</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REQUEST_COMPANION_PROFILE_WATCH</div>
+                    <div class="permission-desc">Allows app to request to be associated with a device via watch profile</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REQUEST_COMPANION_RUN_IN_BACKGROUND</div>
+                    <div class="permission-desc">Allows a companion app to run in the background</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REQUEST_COMPANION_SELF_MANAGED</div>
+                    <div class="permission-desc">Allows an application to create a "self-managed" association</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REQUEST_COMPANION_START_FOREGROUND_SERVICES_FROM_BACKGROUND</div>
+                    <div class="permission-desc">Allows a companion app to start a foreground service from the background</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REQUEST_COMPANION_USE_DATA_IN_BACKGROUND</div>
+                    <div class="permission-desc">Allows a companion app to use data in the background</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="permission-name">REQUEST_DELETE_PACKAGES</div>
+                    <div class="permission-desc">Allows an application to request deleting packages</div>
+                </div>
+                
+                <div class="permission-item">
+                    <div class="
